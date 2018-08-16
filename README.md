@@ -46,3 +46,6 @@ productFlavors 用法
 
     }
 ```
+
+参考：
+ > https://www.jianshu.com/p/533240d222d3
