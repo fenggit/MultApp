@@ -16,6 +16,8 @@ android {
         }
     }
 
+    // see :https://www.jianshu.com/p/533240d222d3
+
     // gradle 3.0 版本以上需要
     flavorDimensions "default"
     productFlavors {
@@ -59,6 +61,22 @@ android {
         }
 
     }
+
+    // rename apk
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all { output ->
+                def outputFile = output.outputFile
+                if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                    //${variant.productFlavors[0].name}
+                    outputFileName = "MultApp_v${defaultConfig.versionName}_${defaultConfig.versionCode}_${releaseTime()}.apk"
+                }
+            }
+    }
+}
+
+def releaseTime() {
+    return new Date().format("yyMMdd", TimeZone.getTimeZone("UTC"))
 }
 
 dependencies {
